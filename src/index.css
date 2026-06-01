@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-cream text-ink font-sans antialiased;
+  /* Subtle blueprint grid texture across the whole page */
+  background-image:
+    linear-gradient(rgba(176, 83, 47, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(176, 83, 47, 0.035) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+/* Selection */
+::selection {
+  background: #B0532F;
+  color: #F6F0E6;
+}
+
+/* Custom thin scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #EDE3D2;
+}
+::-webkit-scrollbar-thumb {
+  background: #C07A53;
+  border: 2px solid #EDE3D2;
+}
+
+@layer components {
+  /* Technical eyebrow label — monospace, all caps, ledger feel */
+  .eyebrow {
+    @apply font-mono text-xs uppercase tracking-[0.25em] text-terracotta;
+  }
+
+  /* Animated underline link */
+  .link-slide {
+    @apply relative inline-block;
+  }
+  .link-slide::after {
+    content: '';
+    @apply absolute left-0 -bottom-0.5 h-px w-full origin-right scale-x-0 bg-current transition-transform duration-300 ease-out;
+  }
+  .link-slide:hover::after,
+  .link-slide:focus-visible::after {
+    @apply origin-left scale-x-100;
+  }
+
+  /* Primary button — industrial press behaviour */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-none border border-ink bg-ink px-6 py-3
+      font-mono text-xs uppercase tracking-[0.18em] text-cream transition-all duration-200
+      hover:-translate-y-0.5 hover:shadow-lift active:translate-y-0 active:shadow-press
+      focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta focus-visible:ring-offset-2 focus-visible:ring-offset-cream;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 rounded-none border border-ink bg-transparent px-6 py-3
+      font-mono text-xs uppercase tracking-[0.18em] text-ink transition-all duration-200
+      hover:-translate-y-0.5 hover:bg-ink hover:text-cream hover:shadow-lift active:translate-y-0 active:shadow-press
+      focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terracotta focus-visible:ring-offset-2 focus-visible:ring-offset-cream;
+  }
+
+  .section-pad {
+    @apply px-5 py-20 sm:px-8 md:py-28 lg:px-12;
+  }
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
