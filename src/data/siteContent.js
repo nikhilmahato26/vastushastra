@@ -35,7 +35,7 @@ export const nav = [
 ];
 
 export const hero = {
-  eyebrow: 'Est. 2009 · Pune · Pan-India',
+  eyebrow: 'Est. 2009 . Pan-India',
   heading: 'Align your space with the directions that govern prosperity.',
   // The headline is split so the last clause can be emphasised
   highlight: 'the directions',
