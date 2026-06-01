@@ -175,7 +175,7 @@ export const about = {
     'Our method is grounded, not superstitious. We read the directions, the five elements and the flow of energy through a property, then translate that into remedies you can actually implement — most of them without touching a single wall.',
   ],
   image:
-    'https://res.cloudinary.com/jerrick/image/upload/v1686043401/647efb09217661001d5db42b.jpg',
+    'https://res.cloudinary.com/dynbpb9u0/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1780308242/Gemini_Generated_Image_wgkd2lwgkd2lwgkd_q5pnpi.png',
   alt: 'Architectural blueprints and drawing tools on a desk',
   trust: [
     'Experienced, certified consultant',
