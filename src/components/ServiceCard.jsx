@@ -57,13 +57,7 @@ export default function ServiceCard({ service, index }) {
           ))}
         </ul>
 
-        <div className="mt-auto flex items-end justify-between border-t border-line pt-5">
-          <div>
-            <span className="block font-mono text-[10px] uppercase tracking-wider text-stone">
-              From
-            </span>
-            <span className="font-display text-lg font-semibold text-ink">{service.price}</span>
-          </div>
+        <div className="mt-auto flex items-center justify-start border-t border-line pt-5">
           <a
             href="#contact"
             className="font-mono text-xs uppercase tracking-[0.15em] text-terracotta link-slide"

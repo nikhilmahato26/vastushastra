@@ -1,7 +1,7 @@
 import { testimonials, pricing } from '../data/siteContent';
 import { Reveal } from '../components/motion';
 import { motion } from 'framer-motion';
-import { CompassWatermark } from '../components/icons';
+import { CompassWatermark, whatsappUrl, WhatsAppIcon } from '../components/icons';
 
 export default function Testimonials() {
   return (
@@ -62,7 +62,7 @@ export default function Testimonials() {
             </h2>
           </Reveal>
 
-          <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-14 grid grid-cols-1 gap-8 sm:grid-cols-2 max-w-4xl mx-auto">
             {pricing.map((plan, i) => (
               <motion.div
                 key={plan.name}
@@ -84,6 +84,11 @@ export default function Testimonials() {
                 <h3 className="font-mono text-xs uppercase tracking-[0.2em] opacity-70">
                   {plan.name}
                 </h3>
+                <span className={`mt-1.5 block font-mono text-[10px] uppercase tracking-wider font-semibold ${
+                  plan.featured ? 'text-clay' : 'text-terracotta'
+                }`}>
+                  Online Consultation
+                </span>
                 <div className="mt-3 flex items-baseline gap-2">
                   <span className="font-display text-4xl font-semibold">{plan.price}</span>
                   <span className="font-mono text-[11px] uppercase tracking-wider opacity-50">
@@ -112,6 +117,38 @@ export default function Testimonials() {
                 </a>
               </motion.div>
             ))}
+          </div>
+
+          {/* Offline Consultation Card */}
+          <div className="mt-8 max-w-4xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.25 }}
+              transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1], delay: 0.16 }}
+              className="border border-line bg-cream p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-card hover:shadow-lift transition-all duration-300"
+            >
+              <div className="flex-1 text-center md:text-left">
+                <span className="inline-block font-mono text-[10px] uppercase tracking-[0.2em] text-terracotta bg-terracotta/10 px-2.5 py-1 mb-3">
+                  Offline / On-Site Consultation
+                </span>
+                <h4 className="font-display text-xl font-medium text-ink">
+                  Need an offline or on-site consultation?
+                </h4>
+                <p className="mt-2 text-sm text-stone max-w-xl">
+                  For site visits, factory layouts, or custom commercial projects across India, let&apos;s discuss your requirements directly.
+                </p>
+              </div>
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="shrink-0 inline-flex items-center gap-2.5 bg-ink text-cream hover:bg-terracotta border border-ink hover:border-terracotta px-6 py-3.5 font-mono text-xs uppercase tracking-[0.15em] transition-all hover:-translate-y-0.5 active:translate-y-0"
+              >
+                <WhatsAppIcon className="h-4 w-4" />
+                Chat on WhatsApp
+              </a>
+            </motion.div>
           </div>
         </div>
       </section>

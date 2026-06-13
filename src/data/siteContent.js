@@ -76,7 +76,6 @@ export const services = [
       'Kitchen, bedroom & balcony guidance',
       'Practical, no-demolition remedies',
     ],
-    price: '₹2,999 – ₹7,999',
   },
   {
     id: 'plot',
@@ -91,7 +90,6 @@ export const services = [
       'Shape and slope evaluation',
       'Pre-purchase advisory report',
     ],
-    price: '₹1,999 – ₹4,999',
   },
   {
     id: 'office',
@@ -106,7 +104,6 @@ export const services = [
       'Employee productivity zoning',
       'Business growth recommendations',
     ],
-    price: '₹5,999 – ₹15,999',
   },
   {
     id: 'industrial',
@@ -121,7 +118,6 @@ export const services = [
       'Energy optimisation across the plant',
       'Site-level direction mapping',
     ],
-    price: '₹12,000 – ₹50,000+',
   },
   {
     id: 'restaurant',
@@ -136,7 +132,6 @@ export const services = [
       'Billing & entrance positioning',
       'Prosperity-focused recommendations',
     ],
-    price: '₹7,999 – ₹15,999',
   },
   {
     id: 'online',
@@ -151,7 +146,6 @@ export const services = [
       'Detailed PDF report',
       'Personalised remedies & follow-up',
     ],
-    price: '₹1,499 – ₹4,999',
   },
 ];
 
@@ -197,31 +191,23 @@ export const process = [
 
 export const pricing = [
   {
-    name: 'Basic',
-    price: '₹1,999',
-    cadence: 'one-time',
-    features: ['30-minute consultation', 'Basic property analysis', 'Practical remedies', 'WhatsApp support'],
-    featured: false,
-  },
-  {
     name: 'Standard',
-    price: '₹4,999',
+    price: '₹5,100',
     cadence: 'one-time',
     features: ['60-minute consultation', 'Detailed analysis', 'PDF report', 'Video consultation', '15 days support'],
     featured: true,
   },
   {
     name: 'Premium',
-    price: '₹9,999',
+    price: '₹12,999',
     cadence: 'one-time',
-    features: ['Complete property assessment', 'Comprehensive PDF report', 'Personalised recommendations', 'Video consultation', '30 days support'],
-    featured: false,
-  },
-  {
-    name: 'Business',
-    price: '₹15,000+',
-    cadence: 'custom',
-    features: ['Commercial property analysis', 'Growth recommendations', 'Priority assistance', 'Ongoing follow-up'],
+    features: [
+      'Everything done online',
+      'Astro Vastu as per the family',
+      'Analysis using birth charts & nakshatras',
+      'Comprehensive PDF report',
+      'Video consultation & 30 days support',
+    ],
     featured: false,
   },
 ];
