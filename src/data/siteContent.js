@@ -196,6 +196,7 @@ export const pricing = [
     cadence: 'one-time',
     features: ['60-minute consultation', 'Detailed analysis', 'Video consultation', '15 days support'],
     featured: true,
+    paymentLink: 'https://pages.razorpay.com/pl_T2HPJQLGR05yfb/view',
   },
   {
     name: 'Premium',
@@ -209,6 +210,7 @@ export const pricing = [
       'Video consultation & 30 days support',
     ],
     featured: false,
+    paymentLink: 'https://pages.razorpay.com/pl_T2HQj4hP3LlovV/view',
   },
 ];
 

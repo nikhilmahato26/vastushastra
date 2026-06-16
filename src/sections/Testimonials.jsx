@@ -106,7 +106,9 @@ export default function Testimonials() {
                 </ul>
 
                 <a
-                  href="#contact"
+                  href={plan.paymentLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={`mt-7 inline-flex items-center justify-center border px-5 py-3 font-mono text-xs uppercase tracking-[0.15em] transition-all hover:-translate-y-0.5 active:translate-y-0 ${
                     plan.featured
                       ? 'border-cream bg-cream text-ink hover:shadow-lift'
