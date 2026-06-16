@@ -5,18 +5,18 @@
 // ============================================================================
 
 export const brand = {
-  name: 'VastuShastra',
-  tagline: 'Ancient Science of Space & Energy',
+  name: 'Vastulogy',
+  tagline: 'Dehradun, India',
   // Used for the small monospace mark in the navbar / footer
-  mark: 'VS',
-  location: 'Pune, Maharashtra · Serving all of India',
+  mark: 'VL',
+  location: 'Dehradun, Uttarakhand · Serving all of India',
   // Replace these with the real business contacts
-  phone: '+91 98765 43210',
-  phoneHref: 'tel:+919876543210',
-  whatsapp: '919876543210', // international format, no + or spaces
+  phone: '+91 7863 863 863',
+  phoneHref: 'tel:+917863863863',
+  whatsapp: '917863863863', // international format, no + or spaces
   whatsappMessage: 'Namaste! I would like to book a Vastu consultation.',
-  email: 'consult@dishavastu.in',
-  address: 'Studio 4, Laxmi Heights, FC Road, Pune 411004',
+  email: 'vastulogy@gmail.com',
+  address: 'Dehradun, Uttarakhand, India',
   socials: {
     instagram: 'https://instagram.com',
     facebook: 'https://facebook.com',

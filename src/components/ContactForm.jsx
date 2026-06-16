@@ -5,7 +5,25 @@ import { whatsappUrl, WhatsAppIcon, PhoneIcon } from './icons';
 import { useToast } from './Toast';
 import { Reveal } from './motion';
 
-const initial = { name: '', email: '', phone: '', service: '', message: '' };
+const initial = { name: '', phone: '', dob: '', service: '', message: '' };
+
+function EnvelopeIcon({ className = 'h-5 w-5' }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="2" y="4" width="20" height="16" rx="0" />
+      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+    </svg>
+  );
+}
+
+function MapPinIcon({ className = 'h-5 w-5' }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+      <circle cx="12" cy="10" r="3" />
+    </svg>
+  );
+}
 
 export default function ContactForm() {
   const { push } = useToast();
@@ -17,9 +35,8 @@ export default function ContactForm() {
   const validate = () => {
     const e = {};
     if (!values.name.trim()) e.name = 'Please enter your name.';
-    if (!/^\S+@\S+\.\S+$/.test(values.email)) e.email = 'Enter a valid email address.';
-    if (!/^[0-9+\s-]{8,15}$/.test(values.phone)) e.phone = 'Enter a valid phone number.';
-    if (!values.service) e.service = 'Select a service.';
+    if (!/^[0-9+\s-]{8,15}$/.test(values.phone.replace(/\s+/g, ''))) e.phone = 'Enter a valid phone number.';
+    if (!values.message.trim()) e.message = 'Please enter your message.';
     setErrors(e);
     return Object.keys(e).length === 0;
   };
@@ -36,11 +53,22 @@ export default function ContactForm() {
       return;
     }
     setLoading(true);
-    // Simulate an async submission. Replace with your real endpoint / Formspree / EmailJS.
-    await new Promise((r) => setTimeout(r, 1400));
+    // Simulate an async submission
+    await new Promise((r) => setTimeout(r, 1200));
     setLoading(false);
+
+    // Format pre-filled WhatsApp message
+    const messageText = `Namaste Vastulogy! I would like to request a Vastu consultation.
+*Name:* ${values.name}
+*Phone:* ${values.phone}
+${values.dob ? `*Date of Birth:* ${values.dob}` : ''}
+${values.service ? `*Category:* ${values.service}` : ''}
+*Message:* ${values.message}`;
+    const waLink = `https://wa.me/${brand.whatsapp}?text=${encodeURIComponent(messageText)}`;
+    window.open(waLink, '_blank');
+
     setDone(true);
-    push('Request received — we will be in touch shortly.', 'success');
+    push('Request received — redirecting to WhatsApp.', 'success');
     setValues(initial);
   };
 
@@ -49,16 +77,13 @@ export default function ContactForm() {
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
         {/* Left column — info */}
         <Reveal className="lg:col-span-5">
-          <span className="eyebrow">Get in touch</span>
+          <span className="eyebrow">Direct Contact</span>
           <h2 className="mt-4 font-display text-3xl font-medium leading-tight text-ink sm:text-4xl lg:text-5xl">
-            Book your consultation.
+            Contact Directly
           </h2>
-          <p className="mt-5 text-lg leading-relaxed text-stone">
-            Fill in the form and we&apos;ll get back within one working day — or reach us directly on
-            WhatsApp and phone.
-          </p>
 
           <div className="mt-10 space-y-px border border-line bg-line">
+            {/* Phone card */}
             <a
               href={brand.phoneHref}
               className="flex items-center gap-4 bg-cream px-6 py-5 transition-colors hover:bg-sand/50"
@@ -66,32 +91,54 @@ export default function ContactForm() {
               <PhoneIcon className="h-5 w-5 text-terracotta" />
               <span>
                 <span className="block font-mono text-[10px] uppercase tracking-wider text-stone">
-                  Call
+                  Phone
                 </span>
                 <span className="font-display text-lg text-ink">{brand.phone}</span>
               </span>
             </a>
+
+            {/* Email card */}
+            <a
+              href={`mailto:${brand.email}`}
+              className="flex items-center gap-4 bg-cream px-6 py-5 transition-colors hover:bg-sand/50"
+            >
+              <EnvelopeIcon className="h-5 w-5 text-terracotta" />
+              <span>
+                <span className="block font-mono text-[10px] uppercase tracking-wider text-stone">
+                  Email
+                </span>
+                <span className="font-display text-lg text-ink">{brand.email}</span>
+              </span>
+            </a>
+
+            {/* Location card */}
+            <div className="flex items-center gap-4 bg-cream px-6 py-5">
+              <MapPinIcon className="h-5 w-5 text-terracotta" />
+              <span>
+                <span className="block font-mono text-[10px] uppercase tracking-wider text-stone">
+                  Location
+                </span>
+                <span className="font-display text-lg text-ink">{brand.address}</span>
+              </span>
+            </div>
+          </div>
+
+          {/* Quick buttons */}
+          <div className="mt-8 flex gap-4">
             <a
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-4 bg-cream px-6 py-5 transition-colors hover:bg-sand/50"
+              className="btn-primary flex-1 py-4 text-center justify-center"
             >
-              <WhatsAppIcon className="h-5 w-5 text-terracotta" />
-              <span>
-                <span className="block font-mono text-[10px] uppercase tracking-wider text-stone">
-                  WhatsApp
-                </span>
-                <span className="font-display text-lg text-ink">Quick support</span>
-              </span>
+              <WhatsAppIcon className="h-4 w-4" /> WhatsApp
             </a>
-            <div className="bg-cream px-6 py-5">
-              <span className="block font-mono text-[10px] uppercase tracking-wider text-stone">
-                Studio
-              </span>
-              <span className="font-display text-lg text-ink">{brand.address}</span>
-              <span className="mt-1 block text-sm text-stone">{brand.email}</span>
-            </div>
+            <a
+              href={brand.phoneHref}
+              className="btn-outline flex-1 py-4 text-center justify-center"
+            >
+              <PhoneIcon className="h-4 w-4" /> Call Now
+            </a>
           </div>
         </Reveal>
 
@@ -100,117 +147,121 @@ export default function ContactForm() {
           {done ? (
             <SuccessState onReset={() => setDone(false)} />
           ) : (
-            <form onSubmit={handleSubmit} noValidate className="border border-line bg-cream p-7 shadow-card sm:p-10">
-              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                <Field id="name" label="Full name" value={values.name} onChange={update('name')} error={errors.name} />
-                <Field id="email" label="Email" type="email" value={values.email} onChange={update('email')} error={errors.email} />
-                <Field id="phone" label="Phone" type="tel" value={values.phone} onChange={update('phone')} error={errors.phone} />
+            <form onSubmit={handleSubmit} noValidate className="border border-line bg-cream p-7 shadow-card sm:p-10 space-y-6">
+              <h3 className="font-display text-2xl font-medium text-ink">
+                Consultation Request
+              </h3>
 
-                {/* Service select */}
+              {/* Name */}
+              <div className="flex flex-col gap-1.5">
+                <label htmlFor="name" className="block font-mono text-[10px] uppercase tracking-wider text-stone">
+                  Your Name *
+                </label>
+                <input
+                  id="name"
+                  type="text"
+                  placeholder="Enter your full name"
+                  value={values.name}
+                  onChange={update('name')}
+                  className={`w-full border bg-transparent px-4 py-3 text-ink placeholder-stone/40 transition-colors focus:border-terracotta focus:outline-none ${
+                    errors.name ? 'border-ember' : 'border-line focus:border-terracotta'
+                  }`}
+                />
+                {errors.name && <span className="text-[11px] text-ember font-mono mt-0.5">{errors.name}</span>}
+              </div>
+
+              {/* Phone */}
+              <div className="flex flex-col gap-1.5">
+                <label htmlFor="phone" className="block font-mono text-[10px] uppercase tracking-wider text-stone">
+                  Phone Number *
+                </label>
+                <input
+                  id="phone"
+                  type="tel"
+                  placeholder="10 digit mobile number"
+                  value={values.phone}
+                  onChange={update('phone')}
+                  className={`w-full border bg-transparent px-4 py-3 text-ink placeholder-stone/40 transition-colors focus:border-terracotta focus:outline-none ${
+                    errors.phone ? 'border-ember' : 'border-line focus:border-terracotta'
+                  }`}
+                />
+                {errors.phone && <span className="text-[11px] text-ember font-mono mt-0.5">{errors.phone}</span>}
+              </div>
+
+              {/* Date of Birth */}
+              <div className="flex flex-col gap-1.5">
+                <label htmlFor="dob" className="block font-mono text-[10px] uppercase tracking-wider text-stone">
+                  Date of Birth
+                </label>
+                <input
+                  id="dob"
+                  type="date"
+                  placeholder="dd/mm/yyyy"
+                  value={values.dob}
+                  onChange={update('dob')}
+                  className="w-full border border-line bg-transparent px-4 py-3 text-ink placeholder-stone/40 transition-colors focus:border-terracotta focus:outline-none"
+                />
+              </div>
+
+              {/* Problem Category */}
+              <div className="flex flex-col gap-1.5">
+                <label htmlFor="service" className="block font-mono text-[10px] uppercase tracking-wider text-stone">
+                  Problem Category
+                </label>
                 <div className="relative">
                   <select
                     id="service"
                     value={values.service}
                     onChange={update('service')}
-                    className={`peer w-full appearance-none border bg-transparent px-4 pb-2 pt-6 text-ink transition-colors focus:outline-none ${
-                      errors.service ? 'border-ember' : 'border-line focus:border-terracotta'
-                    }`}
+                    className="w-full appearance-none border border-line bg-transparent px-4 py-3 text-ink transition-colors focus:border-terracotta focus:outline-none"
                   >
-                    <option value="" disabled hidden></option>
+                    <option value="">Select a service (optional)</option>
                     {serviceOptions.map((o) => (
                       <option key={o} value={o}>
                         {o}
                       </option>
                     ))}
                   </select>
-                  <label
-                    htmlFor="service"
-                    className={`pointer-events-none absolute left-4 top-2 font-mono text-[10px] uppercase tracking-wider ${
-                      errors.service ? 'text-ember' : 'text-stone'
-                    }`}
-                  >
-                    Service
-                  </label>
-                  <span className="pointer-events-none absolute right-4 top-6 text-stone">▾</span>
-                  {errors.service && <ErrorText>{errors.service}</ErrorText>}
+                  <span className="pointer-events-none absolute right-4 top-[50%] -translate-y-[50%] text-stone">▾</span>
                 </div>
               </div>
 
               {/* Message */}
-              <div className="relative mt-6">
+              <div className="flex flex-col gap-1.5">
+                <label htmlFor="message" className="block font-mono text-[10px] uppercase tracking-wider text-stone">
+                  Your Message *
+                </label>
                 <textarea
                   id="message"
                   rows={4}
+                  placeholder="Write your problem or question here..."
                   value={values.message}
                   onChange={update('message')}
-                  placeholder=" "
-                  className="peer w-full resize-none border border-line bg-transparent px-4 pb-2 pt-6 text-ink transition-colors placeholder-transparent focus:border-terracotta focus:outline-none"
+                  className={`w-full resize-none border bg-transparent px-4 py-3 text-ink placeholder-stone/40 transition-colors focus:border-terracotta focus:outline-none ${
+                    errors.message ? 'border-ember' : 'border-line focus:border-terracotta'
+                  }`}
                 />
-                <label
-                  htmlFor="message"
-                  className="pointer-events-none absolute left-4 top-4 font-mono text-sm text-stone transition-all peer-focus:top-2 peer-focus:text-[10px] peer-focus:uppercase peer-focus:tracking-wider peer-[:not(:placeholder-shown)]:top-2 peer-[:not(:placeholder-shown)]:text-[10px] peer-[:not(:placeholder-shown)]:uppercase peer-[:not(:placeholder-shown)]:tracking-wider"
-                >
-                  Tell us about your space (optional)
-                </label>
+                {errors.message && <span className="text-[11px] text-ember font-mono mt-0.5">{errors.message}</span>}
               </div>
 
-              <button type="submit" disabled={loading} className="btn-primary mt-7 w-full disabled:opacity-70">
+              <button
+                type="submit"
+                disabled={loading}
+                className="btn-primary w-full py-4 text-center justify-center"
+              >
                 {loading ? (
                   <>
                     <Spinner /> Sending…
                   </>
                 ) : (
-                  'Send request'
+                  '👉 Send on WhatsApp & Email'
                 )}
               </button>
-
-              <p className="mt-4 text-center font-mono text-[10px] uppercase tracking-wider text-stone">
-                By submitting you agree to our privacy policy.
-              </p>
             </form>
           )}
         </Reveal>
       </div>
     </section>
-  );
-}
-
-/* Floating-label text field */
-function Field({ id, label, value, onChange, error, type = 'text' }) {
-  return (
-    <div className="relative">
-      <input
-        id={id}
-        type={type}
-        value={value}
-        onChange={onChange}
-        placeholder=" "
-        aria-invalid={!!error}
-        aria-describedby={error ? `${id}-error` : undefined}
-        className={`peer w-full border bg-transparent px-4 pb-2 pt-6 text-ink transition-colors placeholder-transparent focus:outline-none ${
-          error ? 'border-ember' : 'border-line focus:border-terracotta'
-        }`}
-      />
-      <label
-        htmlFor={id}
-        className={`pointer-events-none absolute left-4 top-4 font-mono text-sm transition-all peer-focus:top-2 peer-focus:text-[10px] peer-focus:uppercase peer-focus:tracking-wider peer-[:not(:placeholder-shown)]:top-2 peer-[:not(:placeholder-shown)]:text-[10px] peer-[:not(:placeholder-shown)]:uppercase peer-[:not(:placeholder-shown)]:tracking-wider ${
-          error ? 'text-ember' : 'text-stone'
-        }`}
-      >
-        {label}
-      </label>
-      {error && (
-        <ErrorText id={`${id}-error`}>{error}</ErrorText>
-      )}
-    </div>
-  );
-}
-
-function ErrorText({ children, id }) {
-  return (
-    <span id={id} className="mt-1.5 block font-mono text-[11px] text-ember">
-      {children}
-    </span>
   );
 }
 
@@ -231,7 +282,7 @@ function SuccessState({ onReset }) {
       transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
       className="flex h-full flex-col items-center justify-center border border-ink bg-ink p-12 text-center text-cream"
     >
-      <span className="flex h-14 w-14 items-center justify-center rounded-full border border-clay text-2xl text-clay">
+      <span className="flex h-14 w-14 items-center justify-center rounded-none border border-clay text-2xl text-clay">
         ✓
       </span>
       <h3 className="mt-6 font-display text-2xl">Request received.</h3>
