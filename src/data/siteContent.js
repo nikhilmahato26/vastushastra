@@ -194,7 +194,7 @@ export const pricing = [
     name: 'Standard',
     price: '₹5,100',
     cadence: 'one-time',
-    features: ['60-minute consultation', 'Detailed analysis', 'PDF report', 'Video consultation', '15 days support'],
+    features: ['60-minute consultation', 'Detailed analysis', 'Video consultation', '15 days support'],
     featured: true,
   },
   {
@@ -205,7 +205,7 @@ export const pricing = [
       'Everything done online',
       'Astro Vastu as per the family',
       'Analysis using birth charts & nakshatras',
-      'Comprehensive PDF report',
+
       'Video consultation & 30 days support',
     ],
     featured: false,
