@@ -252,10 +252,7 @@ export const faqs = [
     q: 'How long does a consultation take?',
     a: 'Typically between 30 and 90 minutes depending on the size and type of property and the plan you choose.',
   },
-  {
-    q: 'Will I receive a written report?',
-    a: 'Yes. A detailed, prioritised PDF report is included with the Standard, Premium and Business plans.',
-  },
+
   {
     q: 'Is your approach religious or scientific?',
     a: 'Our approach is practical and direction-based. We focus on the logic of the five elements and energy flow rather than fear or ritual.',
