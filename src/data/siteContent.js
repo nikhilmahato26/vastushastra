@@ -7,6 +7,7 @@
 export const brand = {
   name: 'Vastulogy',
   tagline: 'Dehradun, India',
+  logo: 'https://www.akshitkapoor.com/wp-content/uploads/2020/05/Vastu-logy-original-copy.png',
   // Used for the small monospace mark in the navbar / footer
   mark: 'VL',
   location: 'Dehradun, Uttarakhand · Serving all of India',

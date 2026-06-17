@@ -38,24 +38,19 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? 'border-b border-line bg-cream/80 backdrop-blur-md'
-          : 'border-b border-transparent bg-transparent'
-      }`}
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${scrolled
+        ? 'border-b border-line bg-cream/80 backdrop-blur-md'
+        : 'border-b border-transparent bg-transparent'
+        }`}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8 lg:px-12">
         {/* Brand mark */}
-        <a href="#top" className="group flex items-center gap-3" aria-label={brand.name}>
-          <span className="flex h-9 w-9 items-center justify-center border border-ink">
-            <CompassMark />
-          </span>
-          <span className="leading-none">
-            <span className="block font-display text-lg font-semibold text-ink">{brand.name}</span>
-            <span className="block font-mono text-[10px] uppercase tracking-[0.2em] text-stone">
-              {brand.tagline}
-            </span>
-          </span>
+        <a href="#top" className="group flex items-center" aria-label={brand.name}>
+          <img
+            src={brand.logo}
+            alt={brand.name}
+            className="h-16 w-auto object-contain"
+          />
         </a>
 
         {/* Desktop links */}
@@ -66,9 +61,8 @@ export default function Navbar() {
               <li key={item.href}>
                 <a
                   href={item.href}
-                  className={`link-slide font-mono text-xs uppercase tracking-[0.15em] transition-colors ${
-                    isActive ? 'text-terracotta' : 'text-ink hover:text-terracotta'
-                  }`}
+                  className={`link-slide font-mono text-xs uppercase tracking-[0.15em] transition-colors ${isActive ? 'text-terracotta' : 'text-ink hover:text-terracotta'
+                    }`}
                 >
                   {item.label}
                 </a>
@@ -97,14 +91,12 @@ export default function Navbar() {
           >
             <span className="relative block h-3 w-5">
               <span
-                className={`absolute left-0 top-0 h-0.5 w-5 bg-ink transition-transform duration-300 ${
-                  open ? 'translate-y-1.5 rotate-45' : ''
-                }`}
+                className={`absolute left-0 top-0 h-0.5 w-5 bg-ink transition-transform duration-300 ${open ? 'translate-y-1.5 rotate-45' : ''
+                  }`}
               />
               <span
-                className={`absolute bottom-0 left-0 h-0.5 w-5 bg-ink transition-transform duration-300 ${
-                  open ? '-translate-y-1 -rotate-45' : ''
-                }`}
+                className={`absolute bottom-0 left-0 h-0.5 w-5 bg-ink transition-transform duration-300 ${open ? '-translate-y-1 -rotate-45' : ''
+                  }`}
               />
             </span>
           </button>

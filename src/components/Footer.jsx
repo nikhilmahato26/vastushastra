@@ -18,11 +18,12 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-12 md:grid-cols-12">
           {/* Brand */}
           <div className="md:col-span-5">
-            <div className="flex items-center gap-3">
-              <span className="flex h-9 w-9 items-center justify-center border border-ink font-mono text-sm text-terracotta">
-                {brand.mark}
-              </span>
-              <span className="font-display text-xl font-semibold text-ink">{brand.name}</span>
+            <div className="flex items-center">
+              <img
+                src={brand.logo}
+                alt={brand.name}
+                className="h-16 w-auto object-contain"
+              />
             </div>
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-stone">
               {brand.tagline}. Authentic, practical Vastu Shastra consultation since {brand.established}.
