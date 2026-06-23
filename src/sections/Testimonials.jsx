@@ -105,18 +105,24 @@ export default function Testimonials() {
                   ))}
                 </ul>
 
-                <a
-                  href={plan.paymentLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`mt-7 inline-flex items-center justify-center border px-5 py-3 font-mono text-xs uppercase tracking-[0.15em] transition-all hover:-translate-y-0.5 active:translate-y-0 ${
-                    plan.featured
-                      ? 'border-cream bg-cream text-ink hover:shadow-lift'
-                      : 'border-ink text-ink hover:bg-ink hover:text-cream'
-                  }`}
-                >
-                  Get started
-                </a>
+                <div className="mt-8 space-y-3">
+                  <a
+                    href={plan.paymentLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex w-full items-center justify-center gap-2 border border-clay/70 bg-copper px-5 py-3.5 font-mono text-xs uppercase tracking-[0.15em] text-cream shadow-[0_0_18px_rgba(168,117,78,0.45)] transition-all hover:-translate-y-0.5 hover:bg-copper/90 hover:shadow-[0_0_28px_rgba(168,117,78,0.7)] active:translate-y-0"
+                  >
+                    Book My Consultation
+                  </a>
+
+                  <p
+                    className={`text-center font-mono text-[10px] tracking-wide ${
+                      plan.featured ? 'text-cream/55' : 'text-stone/70'
+                    }`}
+                  >
+                    Reply within a few hours · No obligation
+                  </p>
+                </div>
               </motion.div>
             ))}
           </div>

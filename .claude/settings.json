@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -rln \"Pricing\\\\|pricing\\\\|Plan\\\\|plan\" src/components/ src/pages/)",
+      "Bash(ls src/components/)",
+      "Bash(ls src/pages/)"
+    ]
+  }
+}
