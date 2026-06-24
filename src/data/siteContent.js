@@ -42,7 +42,7 @@ export const hero = {
   highlight: 'the directions',
   subheading:
     'Authentic Vastu Shastra consultation for homes, offices, shops and industrial units — grounded in the science of the five elements and practical, no-demolition remedies.',
-  primaryCta: { label: 'Book Consultation', href: '#contact' },
+  primaryCta: { label: 'Book Consultation', href: '#pricing' },
   secondaryCta: { label: 'Free Vastu Assessment', href: '#contact' },
   image:
     'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
